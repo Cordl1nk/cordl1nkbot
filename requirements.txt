@@ -1,4 +1,5 @@
 discord.py   
 aiohttp
 websockets
+pillow
 chardet
