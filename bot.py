@@ -229,4 +229,4 @@ async def card_user(ctx):
 # Run bot
 token = os.environ.get('BOT_TOKEN')
 
-client.run(str(token))
+bot.run(str(token))
