@@ -24,7 +24,7 @@ async def on_ready():
 async def on_message(message):
 	await client.process_commands(message)
 	badwords = ['долбаёб', 'лузер', 'сучара', 'дибил', 'иди на хуй', 'гандон', 'гандониха', 'чмо', 'мразь', 'дура', 'шмара', 'еблан', 'гадзила йобана', 'гадзила ёбана', 'годзила ёбана', 'гадзила ёбаная', 'годзила ёбаная', 'годзила йобаная', 'гадзила йобаная', 'годзила йобана', 'шлюха', 'тьотя шлюха', 'дура без трусов', 'иди нахуй', 'нахуй иди', 'на хуй иди', 'хуйло', 'даун', 'сука', 'днище', 'чмо', 'лох', 'лошара', 'чмошник', 'пидар', 'гандон', 'пизда', 'блядина', 'блядский', 'мудозвон', 'выёбывается', 'доебался', 'ебало', 'заебал', 'объебал', 'тупой', 'уёбище', 'твою мать']
-	unwarnusers = ['Cordl1nk#6609']
+	unwarnusers = ['Cordl1nk#6609', 'Kowak#7454']
 	for word in badwords:
 		if word in message.content.lower():
 			if str(message.author) not in unwarnusers:
@@ -44,6 +44,7 @@ async def on_message(message):
 					mutedRole = discord.utils.get(message.guild.roles, name="mute")
 					await message.author.add_roles(mutedRole)
 				channel = client.get_channel(700057004210782308)
+				await message.delete()
 				await channel.send(f'----------------------------\nЗа человеком {message.author.mention} было замечено нарушение.\nВот его сообщение: \n{message.content}\nНарушение было в канале {message.channel}\nНарушения: {warns}\n')
 
 @client.event
