@@ -9,7 +9,6 @@ import io
 import os
 
 PREFIX = '.'
-bad_words = ['долбаёб', 'сучара', 'дибил', 'иди на хуй', 'гандон', 'гандониха', 'чмо', 'мразь', 'дура', 'шмара', 'еблан', 'гадзила йобана', 'гадзила ёбана', 'годзила ёбана', 'гадзила ёбаная', 'годзила ёбаная', 'годзила йобаная', 'гадзила йобаная', 'годзила йобана', 'шлюха', 'тьотя шлюха', 'дура без трусов', 'иди нахуй', 'нахуй иди', 'на хуй иди', 'хуйло', 'даун', 'сука', 'днище', 'чмо', 'лох', 'лошара', 'чмошник', 'пидар', 'гандон', 'пизда', 'блядина', 'блядский', 'мудозвон', 'выёбывается', 'доебался', 'ебало', 'заебал', 'объебал', 'тупой', 'уёбище', 'твою мать']
 
 client = commands.Bot(command_prefix = PREFIX)
 client.remove_command('help')
@@ -20,6 +19,31 @@ async def on_ready():
 	print("Bot is online")
 
 	await client.change_presence(status = discord.Status.online, activity = discord.Game('.help'))
+
+@client.event
+async def on_message(message):
+	badwords = ['долбаёб', 'лузер', 'сучара', 'дибил', 'иди на хуй', 'гандон', 'гандониха', 'чмо', 'мразь', 'дура', 'шмара', 'еблан', 'гадзила йобана', 'гадзила ёбана', 'годзила ёбана', 'гадзила ёбаная', 'годзила ёбаная', 'годзила йобаная', 'гадзила йобаная', 'годзила йобана', 'шлюха', 'тьотя шлюха', 'дура без трусов', 'иди нахуй', 'нахуй иди', 'на хуй иди', 'хуйло', 'даун', 'сука', 'днище', 'чмо', 'лох', 'лошара', 'чмошник', 'пидар', 'гандон', 'пизда', 'блядина', 'блядский', 'мудозвон', 'выёбывается', 'доебался', 'ебало', 'заебал', 'объебал', 'тупой', 'уёбище', 'твою мать']
+	unwarnusers = ['Cordl1nk#4170']
+	for word in badwords:
+		if word in message.content.lower():
+			if str(message.author) not in unwarnusers:
+				warnFile = open('C:/Users/777/Desktop/Discord bot/wanrs.txt', 'a')
+				warnFile.write(str(message.author.mention) + '\n')
+				warnFile.close()
+				warnFile = open('C:/Users/777/Desktop/Discord bot/wanrs.txt', 'r')
+				warnedUsers = []
+				for line in warnFile:
+					warnedUsers.append(line.strip())
+				warnFile.close()
+				warns = 0
+				for user in warnedUsers:
+					if str(message.author.mention) == user:
+						warns+=1
+				if warns > 4:
+					mutedRole = discord.utils.get(message.guild.roles, name="mute")
+					await message.author.add_roles(mutedRole)
+				channel = client.get_channel(700057004210782308)
+				await channel.send(f'----------------------------\nЗа человеком {message.author.mention} было замечено нарушение.\nВот его сообщение: \n{message.content}\nНарушение было в канале {message.channel}\nНарушения: {warns}\n')
 
 @client.event
 async def on_command_error(ctx, error):
