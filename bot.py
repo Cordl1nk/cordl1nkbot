@@ -50,15 +50,15 @@ async def on_command_error(ctx, error):
 	pass
 
 # Chat filter
-@client.event
-async def on_message(message):
-	await client.process_commands(message)
+#@client.event
+#async def on_message(message):
+	#await client.process_commands(message)
 
-	msg = message.content.lower()
+	#msg = message.content.lower()
 
-	if msg in bad_words:
-		await message.delete()
-		await message.channel.send(f'{message.author.mention}, нельзя оскорблять пользователей на нашем сервере, иначе будет бан!')
+	#if msg in bad_words:
+		#await message.delete()
+		#await message.channel.send(f'{message.author.mention}, нельзя оскорблять пользователей на нашем сервере, иначе будет бан!')
 
 # Hello
 @client.command()
