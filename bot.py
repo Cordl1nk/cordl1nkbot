@@ -27,10 +27,10 @@ async def on_message(message):
 	for word in badwords:
 		if word in message.content.lower():
 			if str(message.author) not in unwarnusers:
-				warnFile = open('C:/Users/777/Desktop/Discord bot/wanrs.txt', 'a')
+				warnFile = open('warns.txt', 'a')
 				warnFile.write(str(message.author.mention) + '\n')
 				warnFile.close()
-				warnFile = open('C:/Users/777/Desktop/Discord bot/wanrs.txt', 'r')
+				warnFile = open('warns.txt', 'r')
 				warnedUsers = []
 				for line in warnFile:
 					warnedUsers.append(line.strip())
