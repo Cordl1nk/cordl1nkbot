@@ -46,6 +46,7 @@ async def on_message(message):
 				channel = client.get_channel(700057004210782308)
 				await message.delete()
 				await channel.send(f'----------------------------\nЗа человеком {message.author.mention} было замечено нарушение.\nВот его сообщение: \n{message.content}\nНарушение было в канале {message.channel}\nНарушения: {warns}\n')
+				await message.channel.send(f'{message.author.mention}, нельзя оскорблять пользователей на нашем сервере, иначе будет мут!')
 
 @client.event
 async def on_command_error(ctx, error):
