@@ -68,6 +68,15 @@ async def on_command_error(ctx, error):
 async def hello(ctx):
 	author = ctx.message.author
 	await ctx.send(f"Привет {author.mention}")
+	
+# Отправка сообщения от имени бота
+@client.command()
+@commands.has_permissions(administrator= True)
+async def say(ctx, channel : discord.TextChannel, *, text):
+    await ctx.channel.purge(limit=1)
+    channel = channel
+    text = text[0]
+    await channel.send(text)
 
 # Help
 @client.command(pass_context = True)
