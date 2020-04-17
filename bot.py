@@ -72,7 +72,7 @@ async def hello(ctx):
 # Отправка сообщения от имени бота
 @client.command()
 @commands.has_permissions(administrator= True)
-async def say(ctx, channel : discord.TextChannel, *, text):
+async def say(ctx, channel : discord.TextChannel, *text):
     await ctx.channel.purge(limit=1)
     channel = channel
     text = text[0]
