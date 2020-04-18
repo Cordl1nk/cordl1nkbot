@@ -72,10 +72,16 @@ async def hello(ctx):
 # Отправка сообщения от имени бота
 @client.command()
 @commands.has_permissions(administrator= True)
-async def say(ctx, channel : discord.TextChannel, *text):
-    await ctx.channel.purge(limit=1)
-    channel = channel
-    text = text[0]
+async def say(ctx, channel : discord.TextChannel, *args):
+    await ctx.message.delete()
+    if not channel:
+        await ctx.send('Введите канал, в который вы хотите отправить сообщение')
+        return
+    if not args:
+        await ctx.send('Необходимо ввести текст сообщения')
+    text = ''
+    for item in args:
+        text = text + item + ' '
     await channel.send(text)
 
 # Help
