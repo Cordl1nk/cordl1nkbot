@@ -81,6 +81,7 @@ async def eagle(ctx):
 # VK
 @client.command()
 async def ownervk(ctx):
+	await ctx.channel.purge(limit =1)
 	emb = discord.Embed(title = 'Owner VK', description = 'Это вк владельца сервера', colour = discord.Color.green(), url = 'https://vk.com/max_1_grozniy')
 
 	emb.set_author(name = client.user.name, icon_url = client.user.avatar_url)
