@@ -78,6 +78,17 @@ async def eagle(ctx):
     else:
         await ctx.send('Вам выпала решка')
 	
+# VK
+@client.command()
+async def ownervk(ctx):
+	emb = discord.Embed(title = 'Owner VK', description = 'Это вк владельца сервера', colour = discord.Color.green(), url = 'https://vk.com/max_1_grozniy')
+
+	emb.set_author(name = client.user.name, icon_url = client.user.avatar_url)
+	emb.set_footer(text = ctx.author.name, icon_url = ctx.author.avatar_url)
+	emb.set_thumbnail(url = 'https://sun1-27.userapi.com/kz43bemMxMrDfrVzTlXctQyc4ZSKCD8Fv-_Sow/ao78Foe_A18.jpg')
+
+	await ctx.send(embed = emb)
+	
 # Отправка сообщения от имени бота
 @client.command()
 @commands.has_permissions(administrator= True)
