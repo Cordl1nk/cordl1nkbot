@@ -69,6 +69,15 @@ async def hello(ctx):
 	author = ctx.message.author
 	await ctx.send(f"Привет {author.mention}")
 	
+# Орёл и решка
+@client.command()
+async def eagle(ctx):
+    a = random.randint(1, 2)
+    if a == 1:
+        await ctx.send('Вам выпал орёл')
+    else:
+        await ctx.send('Вам выпала решка')
+	
 # Отправка сообщения от имени бота
 @client.command()
 @commands.has_permissions(administrator= True)
