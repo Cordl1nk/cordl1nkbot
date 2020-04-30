@@ -118,6 +118,8 @@ async def help(ctx):
 	emb.add_field(name = '{}time'.format(PREFIX), value = 'Вы сможете узнать время по МСК.')
 	emb.add_field(name = '{}card/карта'.format(PREFIX), value = 'Вы сможете посмотреть свою карту пользователя.')
 	emb.add_field(name = '{}clear'.format(PREFIX), value = 'Очистка чата.')
+	emb.add_field(name = '{}ownervk'.format(PREFIX), value = 'Вк владельца сервера.')
+	emb.add_field(name = '{}eagle'.format(PREFIX), value = 'Вы сможете подкинуть монетку.')
 
 	await ctx.send(embed = emb)
 
