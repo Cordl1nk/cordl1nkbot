@@ -120,9 +120,8 @@ async def help(ctx):
 	emb.add_field(name = '{}ban'.format(PREFIX), value = 'Ограничение доступа к серверу.')
 	emb.add_field(name = '{}unban'.format(PREFIX), value = 'Удаление ограничений доступа к серверу.')
 	emb.add_field(name = '{}time'.format(PREFIX), value = 'Вы сможете узнать время по МСК.')
-	emb.add_field(name = '{}card/карта'.format(PREFIX), value = 'Вы сможете посмотреть свою карту пользователя.')
 	emb.add_field(name = '{}clear'.format(PREFIX), value = 'Очистка чата.')
-	emb.add_field(name = '{}ownervk'.format(PREFIX), value = 'Вк владельца сервера.')
+	emb.add_field(name = '{}ownervk'.format(PREFIX), value = 'ВК владельца дискорд сервера.')
 	emb.add_field(name = '{}eagle'.format(PREFIX), value = 'Вы сможете подкинуть монетку.')
 
 	await ctx.send(embed = emb)
@@ -265,40 +264,6 @@ async def clear_error(ctx, error):
 async def clear_error(ctx, error):
 	if isinstance(error, commands.MissingPermissions):
 		await ctx.send(f'{ctx.author.name}, у вас недостаточно прав!')
-
-@card_user.error
-async def clear_error(ctx, error):
-	if isinstance(error, commands.MissingPermissions):
-		await ctx.send(f'{ctx.author.name}, извините но эта команды временно не работает.')
-
-# Карточка пользователя
-@client.command(aliases = ['card', 'карта']) # .я
-async def card_user(ctx):
-	await ctx.channel.purge(limit = 1)
-
-	img = Image.new('RGBA', (450, 200), '#232529')
-	url = str(ctx.author.avatar_url)[:-10]
-
-	response = requests.get(url, stream = True)
-	response = Image.open(io.BytesIO(response.content))
-	response = response.convert('RGBA')
-	response = response.resize((100, 100), Image.ANTIALIAS)
-
-	img.paste(response, (15, 15, 115, 115))
-
-	idraw = ImageDraw.Draw(img)
-	name = ctx.author.name # Kowak
-	tag = ctx.author.discriminator # 0000
-
-	headline = ImageFont.truetype('arial.ttf', size = 20)
-	undertext = ImageFont.truetype('arial.ttf', size = 12)
-
-	idraw.text((145, 15), f'{name}#{tag}', font = headline) # Kowak#0000
-	idraw.text((145, 50), f'ID: {ctx.author.id}', font = undertext)
-
-	img.save('user_card.png')
-
-	await ctx.send(file = discord.File(fp = 'user_card.png'))
 
 # Run bot
 token = os.environ.get('BOT_TOKEN')
