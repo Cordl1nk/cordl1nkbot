@@ -56,7 +56,13 @@ async def on_message(message):
 	msg = message.content.lower()
 	if msg in vk_words:
 		emb = discord.Embed(title = 'Owner VK', description = 'Это вк владельца сервера, переходи для связи с ним!', colour = discord.Color.green(), url = 'https://vk.com/max_1_grozniy')
-	
+
+		emb.set_author(name = client.user.name, icon_url = client.user.avatar_url)
+		emb.set_footer(text = message.author.name, icon_url = message.author.avatar_url)
+		emb.set_thumbnail(url = 'https://sun1-27.userapi.com/kz43bemMxMrDfrVzTlXctQyc4ZSKCD8Fv-_Sow/ao78Foe_A18.jpg')
+
+		await message.channel.send(embed = emb)
+
 @client.event
 async def on_command_error(ctx, error):
 	pass
