@@ -48,20 +48,18 @@ async def on_message(message):
 				await channel.send(f'----------------------------\nЗа человеком {message.author.mention} было замечено нарушение.\nВот его сообщение: \n{message.content}\nНарушение было в канале {message.channel}\nНарушения: {warns}\n')
 				await message.channel.send(f'{message.author.mention}, нельзя оскорблять пользователей на нашем сервере, иначе будет мут!')
 
+vk_words = ['привет', 'здаров', 'даров', 'всем привет', 'салам алейкум', 'салам', 'приветик', 'приветики', 'вечер в хату', 'всем привет']
+
+@client.event
+async def on_message(message):
+	await client.process_commands(message)
+	msg = message.content.lower()
+	if msg in vk_words:
+		emb = discord.Embed(title = 'Owner VK', description = 'Это вк владельца сервера, переходи для связи с ним!', colour = discord.Color.green(), url = 'https://vk.com/max_1_grozniy')
+				
 @client.event
 async def on_command_error(ctx, error):
 	pass
-
-# Chat filter
-#@client.event
-#async def on_message(message):
-	#await client.process_commands(message)
-
-	#msg = message.content.lower()
-
-	#if msg in bad_words:
-		#await message.delete()
-		#await message.channel.send(f'{message.author.mention}, нельзя оскорблять пользователей на нашем сервере, иначе будет бан!')
 
 # Hello
 @client.command()
