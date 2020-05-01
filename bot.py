@@ -56,7 +56,7 @@ async def on_message(message):
 	msg = message.content.lower()
 	if msg in vk_words:
 		emb = discord.Embed(title = 'Owner VK', description = 'Это вк владельца сервера, переходи для связи с ним!', colour = discord.Color.green(), url = 'https://vk.com/max_1_grozniy')
-				
+	
 @client.event
 async def on_command_error(ctx, error):
 	pass
