@@ -266,6 +266,11 @@ async def clear_error(ctx, error):
 	if isinstance(error, commands.MissingPermissions):
 		await ctx.send(f'{ctx.author.name}, у вас недостаточно прав!')
 
+@card_user.error
+async def clear_error(ctx, error):
+	if isinstance(error, commands.MissingPermissions):
+		await ctx.send(f'{ctx.author.name}, извините но эта команды временно не работает.')
+
 # Карточка пользователя
 @client.command(aliases = ['card', 'карта']) # .я
 async def card_user(ctx):
