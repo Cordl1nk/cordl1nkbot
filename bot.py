@@ -55,7 +55,7 @@ async def on_message(message):
 	await client.process_commands(message)
 	msg = message.content.lower()
 	if msg in vk_words:
-		emb = discord.Embed(title = 'Owner VK', description = 'Это вк владельца сервера, переходи для связи с ним!', colour = discord.Color.green(), url = 'https://vk.com/max_1_grozniy')
+		emb = discord.Embed(title = 'Жми сюда чтобы перейти!', description = 'Это вк владельца сервера, переходи для связи с ним!', colour = discord.Color.green(), url = 'https://vk.com/max_1_grozniy')
 
 		emb.set_author(name = client.user.name, icon_url = client.user.avatar_url)
 		emb.set_footer(text = message.author.name, icon_url = message.author.avatar_url)
