@@ -115,6 +115,7 @@ async def help(ctx):
 	emb = discord.Embed(title = 'Навигация по командам', colour = discord.Color.purple() )
 
 	emb.add_field(name = '{}hello'.format(PREFIX), value = 'Бот вам напишет ``Привет``.')
+	emb.add_field(name = '{}warn'.format(PREFIX), value = 'Предупреждает пользователя о нарушении правил (за предупреждение без повода дают бан).')
 	emb.add_field(name = '{}mute'.format(PREFIX), value = 'Ограничение на отправку сообщений в чате.')
 	emb.add_field(name = '{}kick'.format(PREFIX), value = 'Удаление участника с сервера.')
 	emb.add_field(name = '{}ban'.format(PREFIX), value = 'Ограничение доступа к серверу.')
@@ -159,6 +160,36 @@ async def time(ctx):
 @commands.has_permissions(administrator = True)
 async def clear(ctx, amount : int):
 	await ctx.channel.purge(limit = amount)
+	
+# Warn
+@client.command()
+@commands.has_permissions(administrator = True)
+async def warn(message, member: discord.Member):
+	emb = discord.Embed(title = 'Warn', colour = discord.Color.red())
+	emb.set_author(name = member.name, icon_url = member.avatar_url)
+	emb.add_field(name = 'Warn user', value = 'Warned user : {}'.format(member.mention))
+
+	await message.send(embed = emb)
+
+	unwarnusers = ['Cordl1nk#4170']
+	if str(member) not in unwarnusers:
+		warnFile = open('C:/Users/777/Desktop/Discord bot/warns.txt', 'a')
+		warnFile.write(str(member.mention) + '\n')
+		warnFile.close()
+		warnFile = open('C:/Users/777/Desktop/Discord bot/warns.txt', 'r')
+		warnedUsers = []
+		for line in warnFile:
+			warnedUsers.append(line.strip())
+		warnFile.close()
+		warns = 0
+		for user in warnedUsers:
+			if str(member.mention) == user:
+				warns+=1
+		if warns > 3:
+			mutedRole = discord.utils.get(message.guild.roles, name="mute")
+			await member.add_roles(mutedRole)
+		channel = client.get_channel(700057004210782308)
+		await channel.send(f'----------------------------\nЗа человеком {member.mention} было замечено нарушение.\nНарушение было в канале {message.channel}\nНарушения: {warns}\n')
 
 # Mute
 @client.command()
