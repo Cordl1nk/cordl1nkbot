@@ -168,6 +168,7 @@ async def warn(message, member: discord.Member):
 	emb = discord.Embed(title = 'Warn', colour = discord.Color.red())
 	emb.set_author(name = member.name, icon_url = member.avatar_url)
 	emb.add_field(name = 'Warn user', value = 'Warned user : {}'.format(member.mention))
+	emb.set_footer(text = 'Предупреждение было от пользователя {}'.format(message.author.name), icon_url = message.author.avatar_url)
 
 	await message.send(embed = emb)
 
