@@ -174,10 +174,10 @@ async def warn(message, member: discord.Member):
 
 	unwarnusers = ['Cordl1nk#6609', 'Kowak#7454']
 	if str(member) not in unwarnusers:
-		warnFile = open('C:/Users/777/Desktop/Discord bot/warns.txt', 'a')
+		warnFile = open('warns.txt', 'a')
 		warnFile.write(str(member.mention) + '\n')
 		warnFile.close()
-		warnFile = open('C:/Users/777/Desktop/Discord bot/warns.txt', 'r')
+		warnFile = open('warns.txt', 'r')
 		warnedUsers = []
 		for line in warnFile:
 			warnedUsers.append(line.strip())
