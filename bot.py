@@ -163,7 +163,7 @@ async def clear(ctx, amount : int):
 	
 # Warn
 @client.command()
-@commands.has_any_role(667987928810782742, 661704020330807296, 657937468615557120)
+@commands.has_any_role(667987928810782742, 661704020330807296, 657937468615557120, 657937316442013696, 661703201145487401)
 async def warn(message, member: discord.Member):
 	emb = discord.Embed(title = 'Warn', colour = discord.Color.red())
 	emb.set_author(name = member.name, icon_url = member.avatar_url)
