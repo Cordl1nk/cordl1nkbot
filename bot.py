@@ -68,13 +68,13 @@ async def on_command_error(ctx, error):
 	pass
 
 # Hello
-@client.command()
+@client.command(aliases = ['привет'])
 async def hello(ctx):
 	author = ctx.message.author
 	await ctx.send(f"Привет {author.mention}")
 	
 # Орёл и решка
-@client.command()
+@client.command(aliases = ['монета', 'монетка', 'копейка'])
 async def eagle(ctx):
     a = random.randint(1, 2)
     if a == 1:
@@ -83,7 +83,7 @@ async def eagle(ctx):
         await ctx.send('Вам выпала решка')
 	
 # VK
-@client.command()
+@client.command(aliases = ['вк'])
 async def ownervk(ctx):
 	await ctx.channel.purge(limit =1)
 	emb = discord.Embed(title = 'Owner VK', description = 'Это вк владельца сервера', colour = discord.Color.green(), url = 'https://vk.com/max_1_grozniy')
@@ -95,7 +95,7 @@ async def ownervk(ctx):
 	await ctx.send(embed = emb)
 	
 # Отправка сообщения от имени бота
-@client.command()
+@client.command(aliases = ['отправить', 'сообщение'])
 @commands.has_permissions(administrator= True)
 async def say(ctx, channel : discord.TextChannel, *args):
     await ctx.message.delete()
@@ -110,7 +110,7 @@ async def say(ctx, channel : discord.TextChannel, *args):
     await channel.send(text)
 
 # Help
-@client.command(pass_context = True)
+@client.command(aliases = ['помощь', 'команды'], pass_context = True)
 async def help(ctx):
 	emb = discord.Embed(title = 'Навигация по командам', colour = discord.Color.purple() )
 
@@ -138,7 +138,7 @@ async def on_member_join(member):
 	await channel.send(embed = discord.Embed(description = f'Пользователь ``{member.name}``, присоеденился к нам!', color = 0x0c0c0c))
 
 # Time
-@client.command(pass_context = True)
+@client.command(aliases = ['время'], pass_context = True)
 
 async def time(ctx):
 	await ctx.channel.purge(limit =1)
@@ -156,13 +156,13 @@ async def time(ctx):
 	await ctx.send(embed = emb)
 
 # Clear message
-@client.command(pass_context = True)
+@client.command(aliases = ['очистить', 'очистка'], pass_context = True)
 @commands.has_permissions(administrator = True)
 async def clear(ctx, amount : int):
 	await ctx.channel.purge(limit = amount)
 	
 # Warn
-@client.command()
+@client.command(aliases = ['предупреждение', 'пред'])
 @commands.has_any_role(667987928810782742, 661704020330807296, 657937468615557120, 657937316442013696, 661703201145487401)
 async def warn(message, member: discord.Member):
 	emb = discord.Embed(title = 'Warn', colour = discord.Color.red())
@@ -193,7 +193,7 @@ async def warn(message, member: discord.Member):
 		await channel.send(f'----------------------------\nЗа человеком {member.mention} было замечено нарушение.\nНарушение было в канале {message.channel}\nНарушения: {warns}\n')
 
 # Mute
-@client.command()
+@client.command(aliases = ['мут'])
 @commands.has_permissions(administrator = True)
 
 async def mute(ctx, member: discord.Member):
@@ -213,7 +213,7 @@ async def mute(ctx, member: discord.Member):
 	#await ctx.send(f'У {member.mention}, ограничение на отправку сообщений, за нарушение прав!')
 
 # Kick
-@client.command(pass_context = True)
+@client.command(aliases = ['кик', 'выгнать'], pass_context = True)
 @commands.has_permissions(administrator = True)
 
 async def kick(ctx, member: discord.Member, *, reason = None):
@@ -232,7 +232,7 @@ async def kick(ctx, member: discord.Member, *, reason = None):
 	#await ctx.send(f'User {member.mention} was kicked by admin.')
 
 # Ban
-@client.command(pass_context = True)
+@client.command(aliases = ['бан'], pass_context = True)
 @commands.has_permissions(administrator = True)
 
 async def ban(ctx, member: discord.Member, *, reason = None):
@@ -251,7 +251,7 @@ async def ban(ctx, member: discord.Member, *, reason = None):
 	#await ctx.send(f'User {member.mention} was banned by admin.')
 
 # Unban
-@client.command(pass_context = True)
+@client.command(aliases = ['разбан', 'разбанить'], pass_context = True)
 @commands.has_permissions(administrator = True)
 async def unban(ctx, *, member):
 	await ctx.channel.purge(limit =1)
